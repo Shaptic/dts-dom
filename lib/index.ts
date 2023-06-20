@@ -234,12 +234,13 @@ export interface TripleSlashAmdModuleDirective {
     name?: string;
 }
 
-export type PrimitiveType = "string" | "number" | "boolean" | "any" | "unknown" | "void" | "object" | "null" | "undefined" | "true" | "false" | StringLiteral | NumberLiteral;
+export type PrimitiveType = "string" | "number" | "bigint" | "boolean" | "any" | "unknown" | "void" | "object" | "null" | "undefined" | "true" | "false" | StringLiteral | NumberLiteral;
 
 export function isPrimitiveType(x: Type): x is PrimitiveType {
   switch (x) {
       case "string":
       case "number":
+      case "bigint":
       case "boolean":
       case "any":
       case "unknown":
@@ -600,6 +601,7 @@ export const type = {
     },
     string: <PrimitiveType>"string",
     number: <PrimitiveType>"number",
+    bigint: <PrimitiveType>"bigint",
     boolean: <PrimitiveType>"boolean",
     any: <PrimitiveType>"any",
     unknown: <PrimitiveType>"unknown",
@@ -954,7 +956,7 @@ export function emit(rootDecl: TopLevelDeclaration, { rootFlags = ContextFlags.N
             if (p.baseType) {
                 print(' extends ');
 
-                if (isPrimitiveType(p.baseType)) 
+                if (isPrimitiveType(p.baseType))
                     print(String(p.baseType));
                 else if (p.baseType.kind === 'type-parameter')
                     print(p.baseType.name);
