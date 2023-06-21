@@ -4,7 +4,7 @@
 	],
     "compilerOptions": {
         "types": [
-            "@types/node"
+            "@types/jest"
         ],
 
         "module": "commonjs",
@@ -23,4 +23,3 @@
         "forceConsistentCasingInFileNames": true
     }
 }
-
